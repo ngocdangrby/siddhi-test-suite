@@ -24,12 +24,12 @@
 
     <modelVersion>4.0.0</modelVersion>
     <groupId>io.siddhi</groupId>
-    <artifactId>io.siddhi.integration.tests</artifactId>
+    <artifactId>io.siddhi.test.suite.parent</artifactId>
     <version>5.1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
-    <name>Siddhi-IO Integration Tests - Parent</name>
+    <name>Siddhi-IO Test Suite - Parent</name>
     <modules>
-        <module>siddhi-integration-tests</module>
+        <module>siddhi-test-suite</module>
     </modules>
 
     <scm>

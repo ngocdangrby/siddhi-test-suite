@@ -15,7 +15,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package siddhi.integration.tests;
+package siddhi.test.suite;
 
 import com.google.common.io.Resources;
 import io.siddhi.core.SiddhiAppRuntime;

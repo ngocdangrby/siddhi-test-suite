@@ -22,8 +22,8 @@ under the License.
 <suite name="siddhi-distribution-test-suite">
     <test name="stream-processor-core" parallel="false">
         <classes>
-            <class name="siddhi.integration.tests.TemperatureAlertAppUnitTests"/>
-            <class name="siddhi.integration.tests.TemperatureAlertAppTest"/>
+            <class name="siddhi.test.suite.TemperatureAlertAppUnitTests"/>
+            <class name="siddhi.test.suite.TemperatureAlertAppTest"/>
         </classes>
     </test>
 </suite>

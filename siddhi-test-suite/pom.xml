@@ -4,11 +4,11 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <groupId>io.siddhi</groupId>
-        <artifactId>io.siddhi.integration.tests</artifactId>
+        <artifactId>io.siddhi.test.suite.parent</artifactId>
         <version>5.1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>siddhi.integration.tests</artifactId>
+    <artifactId>siddhi.test.suite</artifactId>
     <packaging>bundle</packaging>
     <dependencies>
         <!--Siddhi TestFramework Dependencies-->
@@ -122,14 +122,6 @@
                         </goals>
                         <configuration>
                             <artifactItems>
-                                <!--Jars to be included for ExtendingLib Test-->
-                                <artifactItem>
-                                    <groupId>mysql</groupId>
-                                    <artifactId>mysql-connector-java</artifactId>
-                                    <version>${mysql.connector.version}</version>
-                                    <outputDirectory>${project.build.directory}/ExtendingLibTestResource/jars
-                                    </outputDirectory>
-                                </artifactItem>
                                 <!--Jars to be included for TemperatureAlertAppTest-->
                                 <artifactItem>
                                     <groupId>com.google.protobuf</groupId>
