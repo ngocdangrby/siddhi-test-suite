@@ -15,6 +15,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
+package siddhi.integration.tests;
 
 import com.google.common.io.Resources;
 import io.siddhi.core.SiddhiAppRuntime;
@@ -86,7 +87,7 @@ public class TemperatureAlertAppTest {
     public void setUpCluster() throws IOException, InterruptedException {
         //points to the directory maven-dependency-plugin imported the jars
         Path jarsFromMaven = Paths.get("target", "TemperatureAlertApp/jars");
-        URL appUrl = Resources.getResource("TemperatureAlertApp/app");
+        URL appUrl = Resources.getResource("TemperatureAlertApp/apps");
         URL extraJarsUrl = Resources.getResource("TemperatureAlertApp/jars");
         URL configUrl = Resources.getResource("TemperatureAlertApp/config/TemperatureDB_Datasource.yaml");
         Network network = Network.newNetwork();

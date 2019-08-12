@@ -30,7 +30,6 @@
     <name>Siddhi-IO Integration Tests - Parent</name>
     <modules>
         <module>siddhi-integration-tests</module>
-        <module>coverage-reports</module>
     </modules>
 
     <scm>
@@ -43,15 +42,44 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
+                <groupId>io.siddhi</groupId>
+                <artifactId>siddhi-query-api</artifactId>
+                <version>${siddhi.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.siddhi</groupId>
+                <artifactId>siddhi-query-compiler</artifactId>
+                <version>${siddhi.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.siddhi</groupId>
+                <artifactId>siddhi-core</artifactId>
+                <version>${siddhi.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.siddhi</groupId>
+                <artifactId>siddhi-annotations</artifactId>
+                <version>${siddhi.version}</version>
+            </dependency>
+            <dependency>
                 <groupId>io.siddhi.distribution</groupId>
                 <artifactId>io-siddhi-distribution-test-framework</artifactId>
                 <version>${io.siddhi.test.framework.version}</version>
             </dependency>
             <dependency>
+                <groupId>org.wso2.carbon.datasources</groupId>
+                <artifactId>org.wso2.carbon.datasource.core</artifactId>
+                <version>${carbon.datasources.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.testcontainers</groupId>
+                <artifactId>testcontainers</artifactId>
+                <version>${org.testcontainers.version}</version>
+            </dependency>
+            <dependency>
                 <groupId>org.testng</groupId>
                 <artifactId>testng</artifactId>
                 <version>${testng.version}</version>
-                <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>io.siddhi.extension.map.json</groupId>
@@ -65,15 +93,113 @@
                 <version>${siddhi.io.nats.version}</version>
                 <scope>test</scope>
             </dependency>
+            <dependency>
+                <groupId>io.siddhi.extension.io.http</groupId>
+                <artifactId>siddhi-io-http</artifactId>
+                <version>${siddhi.io.http.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>${mysql.connector.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>io.siddhi.extension.store.rdbms</groupId>
+                <artifactId>siddhi-store-rdbms</artifactId>
+                <version>${siddhi.store.rdbms.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>${slf4j.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.ops4j.pax.logging</groupId>
+                <artifactId>pax-logging-log4j2</artifactId>
+                <version>${pax.logging.log4j2.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.wso2.carbon</groupId>
+                <artifactId>org.wso2.carbon.tools.core</artifactId>
+                <version>${wso2.carbon.tools.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>${maven.surefire.plugin.version}</version>
+                    <configuration>
+                        <testSourceDirectory>${project.build.testSourceDirectory}</testSourceDirectory>
+                        <testClassesDirectory>${project.build.testOutputDirectory}</testClassesDirectory>
+                        <includes>
+                            <include>**/*TestCase.java</include>
+                        </includes>
+                        <useFile>false</useFile>
+                        <forkMode>once</forkMode>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.jacoco</groupId>
+                    <artifactId>jacoco-maven-plugin</artifactId>
+                    <version>${org.jacoco.version}</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-remote-resources-plugin</artifactId>
+                <version>${maven.remote.resources.plugin.version}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>process</goal>
+                        </goals>
+                        <configuration>
+                            <resourceBundles>
+                                <resourceBundle>org.apache:apache-jar-resource-bundle:1.4</resourceBundle>
+                            </resourceBundles>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 
     <properties>
-        <io.siddhi.test.framework.version>5.1.0-SNAPSHOT</io.siddhi.test.framework.version>
+        <io.siddhi.test.framework.version>5.1.0-m2</io.siddhi.test.framework.version>
+        <org.testcontainers.version>1.12.0</org.testcontainers.version>
+        <wso2.carbon.tools.version>5.2.10</wso2.carbon.tools.version>
+        <carbon.datasources.version>1.1.4</carbon.datasources.version>
         <testng.version>6.14.3</testng.version>
+        <slf4j.version>1.7.12</slf4j.version>
+        <pax.logging.log4j2.version>1.11.0</pax.logging.log4j2.version>
+        <siddhi.version>5.1.2</siddhi.version>
         <siddhi.io.nats.version>2.0.4</siddhi.io.nats.version>
+        <siddhi.io.http.version>2.1.0</siddhi.io.http.version>
         <siddhi.map.json.version>5.0.3</siddhi.map.json.version>
+        <siddhi.store.rdbms.version>6.0.2</siddhi.store.rdbms.version>
         <mysql.connector.version>8.0.16</mysql.connector.version>
         <protobuf.version>3.6.1</protobuf.version>
+        <org.jacoco.version>0.8.4</org.jacoco.version>
     </properties>
 </project>

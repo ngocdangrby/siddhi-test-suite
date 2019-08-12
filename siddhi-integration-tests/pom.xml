@@ -8,16 +8,70 @@
         <version>5.1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-
     <artifactId>siddhi.integration.tests</artifactId>
+    <packaging>bundle</packaging>
     <dependencies>
+        <!--Siddhi TestFramework Dependencies-->
         <dependency>
             <groupId>io.siddhi.distribution</groupId>
             <artifactId>io-siddhi-distribution-test-framework</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.testcontainers</groupId>
+            <artifactId>testcontainers</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.wso2.carbon.datasources</groupId>
+            <artifactId>org.wso2.carbon.datasource.core</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.wso2.carbon</groupId>
+            <artifactId>org.wso2.carbon.tools.core</artifactId>
         </dependency>
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.ops4j.pax.logging</groupId>
+            <artifactId>pax-logging-log4j2</artifactId>
+        </dependency>
+
+        <!--Siddhi Dependencies-->
+        <dependency>
+            <groupId>io.siddhi</groupId>
+            <artifactId>siddhi-query-api</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.siddhi</groupId>
+            <artifactId>siddhi-query-compiler</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.siddhi</groupId>
+            <artifactId>siddhi-core</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.siddhi</groupId>
+            <artifactId>siddhi-annotations</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <!--Siddhi Extension Dependencies-->
+        <dependency>
+            <groupId>io.siddhi.extension.store.rdbms</groupId>
+            <artifactId>siddhi-store-rdbms</artifactId>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>io.siddhi.extension.map.json</groupId>
@@ -29,6 +83,23 @@
             <artifactId>siddhi-io-nats</artifactId>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>io.siddhi.extension.io.http</groupId>
+            <artifactId>siddhi-io-http</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.siddhi.extension.map.json</groupId>
+            <artifactId>siddhi-map-json</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+       <!--Client Dependencies-->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.16</version>
+        </dependency>
     </dependencies>
     <build>
         <resources>
@@ -37,6 +108,7 @@
                 <filtering>true</filtering>
             </resource>
         </resources>
+
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -74,6 +146,46 @@
                                     </outputDirectory>
                                 </artifactItem>
                             </artifactItems>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <argLine>${jacoco.agent.argLine}</argLine>
+                    <environmentVariables>
+                        <testEnvironmentVariable>EnvironmentVariable</testEnvironmentVariable>
+                    </environmentVariables>
+                    <suiteXmlFiles>
+                        <suiteXmlFile>src/test/resources/testng.xml</suiteXmlFile>
+                    </suiteXmlFiles>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>jacoco-initialize</id>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                        <configuration>
+                            <destFile>${basedir}/target/jacoco.exec</destFile>
+                            <propertyName>jacoco.agent.argLine</propertyName>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>jacoco-site</id>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                        <configuration>
+                            <dataFile>${basedir}/target/jacoco.exec</dataFile>
+                            <outputDirectory>${basedir}/target/coverage-reports/site</outputDirectory>
                         </configuration>
                     </execution>
                 </executions>
