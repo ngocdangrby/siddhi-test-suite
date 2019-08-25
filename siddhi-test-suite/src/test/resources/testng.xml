@@ -20,10 +20,10 @@ under the License.
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
 <suite name="siddhi-distribution-test-suite">
-    <test name="stream-processor-core" parallel="false">
+    <test name="stream-processor-core" parallel="false" verbose="1">
         <classes>
             <class name="siddhi.test.suite.TemperatureAlertAppUnitTests"/>
-            <class name="siddhi.test.suite.TemperatureAlertAppTest"/>
+            <class name="siddhi.test.suite.TemperatureAlertAppIntegrationTests"/>
         </classes>
     </test>
 </suite>
