@@ -8,7 +8,7 @@ wso2.datasources:
         jdbcUrl: '${DATABASE_URL}'
         username: ${USERNAME}
         password: ${PASSWORD}
-        driverClassName: ${JDBC_DRIVER_NAME}
+        driverClassName: "com.mysql.cj.jdbc.Driver"
         maxPoolSize: 10
         idleTimeout: 60000
         connectionTestQuery: SELECT 1
