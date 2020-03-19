@@ -98,7 +98,7 @@ public class TemperatureAlertAppUnitTests {
     @Test
     public void testSiddhiRunnerStartup() {
         SiddhiRunnerContainer siddhiRunnerContainer = 
-            new SiddhiRunnerContainer("siddhiio/siddhi-runner-ubuntu:5.1.0-m2")
+            new SiddhiRunnerContainer("siddhivt/siddhi-runner-test:latest")
                 .withLogConsumer(new Slf4jLogConsumer(logger));
         siddhiRunnerContainer.start();
         WaitingConsumer consumer = new WaitingConsumer();
