@@ -69,7 +69,7 @@ public class TemperatureAlertAppUnitTests {
                 EventPrinter.print(timeStamp, inEvents, removeEvents);
                 count.incrementAndGet();
                 if (count.get() == 1) {
-                    Assert.assertTrue("CyrusTwo".equals(inEvents[0].getData(0)));
+                    Assert.assertTrue("CyrusOne".equals(inEvents[0].getData(0)));
                 }
                 if (count.get() == 2) {
                     Assert.assertTrue("Kennisnet".equals(inEvents[0].getData(0)));
